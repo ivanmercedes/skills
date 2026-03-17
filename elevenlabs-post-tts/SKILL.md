@@ -1,6 +1,7 @@
 ---
 name: elevenlabs-post-tts
-description: Convert Astro blog posts to audio using the ElevenLabs text-to-speech API. Use this skill whenever the user wants to: generate an audio version of a blog post written in Astro (Markdown/MDX); create an MP3 to embed in a blog page; turn their blog content into a listenable narration; add a "listen to this post" feature to their Astro site. Trigger when the user says things like "convert this post to audio", "generate audio for my blog post", "make an MP3 for this article", "add audio to my Astro post", "use ElevenLabs for my blog", or shares a .md/.mdx file and wants it narrated. Always use this skill when ElevenLabs + Astro blog or blog post are mentioned together.
+description: >
+ Convert Astro blog posts to audio using the ElevenLabs text-to-speech API. Use this skill whenever the user wants to: generate an audio version of a blog post written in Astro (Markdown/MDX); create an MP3 to embed in a blog page; turn their blog content into a listenable narration; add a "listen to this post" feature to their Astro site. Trigger when the user says things like "convert this post to audio", "generate audio for my blog post", "make an MP3 for this article", "add audio to my Astro post", "use ElevenLabs for my blog", or shares a .md/.mdx file and wants it narrated. Always use this skill when ElevenLabs + Astro blog or blog post are mentioned together.
 ---
 
 # ElevenLabs — Astro Blog Post to Audio
