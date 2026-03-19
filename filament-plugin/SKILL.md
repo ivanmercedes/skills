@@ -9,6 +9,8 @@ description: >
   published or physically copied into the main project. Trigger this skill when the user
   says things like "add a billing module", "create an inventory plugin", "I need a new
   Filament module for X", or any request that implies encapsulated functionality in Filament.
+tags:
+  - filamnent
 ---
 
 # Filament Plugin Skill — Modular Laravel Architecture
