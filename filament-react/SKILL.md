@@ -1,6 +1,6 @@
 ﻿---
 name: "filament-react"
-description: "Configure and integrate React inside Laravel projects that use Filament v3, v4, and v5 to render React components in Blade views, custom pages, widgets, or panel resources. Use when the user asks to add React to Filament, mount React components inside Filament pages, pass props or state from PHP to React, support multi-version Filament setups, check whether React is already installed, finish only the missing setup steps, enable hot reload, validate whether a Filament custom theme is already in use, configure a custom theme when needed, or troubleshoot Vite asset loading in Filament."
+description: "Configure and integrate React inside Laravel projects that use Filament v3, v4, and v5 to render React components in Blade views, custom pages, widgets, or panel resources. Use when the user asks to add React to Filament, mount React components inside Filament pages, pass props or state from PHP to React, support multi-version Filament setups, check whether React is already installed, finish only the missing setup steps, enable hot reload, validate whether a Filament custom theme is already in use, create a custom theme if it does not exist, or troubleshoot Vite asset loading in Filament."
 ---
 
 # Filament React
@@ -18,6 +18,7 @@ Before installing anything, inspect the project and decide whether React is alre
 5. Check whether the panel already uses a Filament custom theme and whether that theme is built through Vite.
 6. Check whether local development hot reload is already working for Filament assets.
 7. If React and the base frontend stack are already installed, do not reinstall them. Only complete the missing setup.
+8. Treat a Filament custom theme as required for a stable React-in-Filament workflow. If it is missing, create it.
 
 ## Version matrix
 
@@ -33,7 +34,7 @@ Before installing anything, inspect the project and decide whether React is alre
 4. If React is already installed, reuse the existing setup and avoid replacing working project conventions unless the user asks for a refactor.
 5. Detect whether Filament already uses a custom theme for panel assets.
 6. If a custom theme already exists, reuse it for React-enabled assets and hot reload.
-7. If no custom theme exists and the current Filament setup requires one for panel asset bundling or hot reload, create and register it using the version-appropriate Filament theme flow.
+7. If no custom theme exists, create and register it using the version-appropriate Filament theme flow before wiring React into the panel.
 8. Create or extend a React entrypoint (`resources/js/filament-react.jsx`) and one or more components (`resources/js/components/*.jsx`).
 9. Mount a root node from Blade (`<div data-react-component=...>` or a fixed id).
 10. Load assets with `@vite(...)` or through the Filament theme pipeline from the version-specific view, layout, or panel hook.
@@ -47,7 +48,7 @@ Before installing anything, inspect the project and decide whether React is alre
 - If the project already has a component registration pattern, follow it.
 - If the project already has a Filament-specific asset hook or panel layout override, reuse it.
 - If the project already uses a Filament custom theme, extend that theme instead of creating a second one.
-- If hot reload depends on a Filament custom theme in the current version or project structure, configure the theme before wiring React into the panel.
+- Always ensure the panel has a custom theme before finalizing the React integration, even if a minimal Blade-only setup seems to work at first.
 - If the project uses Filament v3, check the Tailwind version before assuming the v4/v5 Vite theme flow will work unchanged.
 - If the project uses Filament v3 with Tailwind v4 already installed, prefer the documented CLI fallback and the asset-based `->theme(...)` registration when necessary.
 - Only create new files when the current project structure does not already provide the required integration point.
@@ -60,7 +61,7 @@ Before installing anything, inspect the project and decide whether React is alre
 - When Filament or Livewire state is involved, pass initial data as props and handle follow-up interactions through endpoints or events.
 - Keep only a thin version-specific integration layer where asset injection changes, and share the rest of the React code.
 - Preserve the repository's existing frontend conventions whenever React is already installed.
-- Prefer integrating React through the existing Filament theme asset flow when that is what enables reliable panel hot reload.
+- Prefer integrating React through the Filament theme asset flow, because that is the default path for reliable panel styling, Tailwind usage, and hot reload.
 
 ## Version-specific integration
 
@@ -80,7 +81,7 @@ Before installing anything, inspect the project and decide whether React is alre
 
 1. Check whether Filament already has a custom theme directory and panel registration for it.
 2. If a custom theme exists, wire the React entrypoint into that theme or reuse the theme entrypoint so Vite hot reload works inside the panel.
-3. If no custom theme exists, create one when needed for reliable panel asset loading and hot reload.
+3. If no custom theme exists, create one before finalizing the React integration.
 4. For Filament v4 and v5, prefer `php artisan make:filament-theme`.
 5. If the project has multiple panels, generate the theme for the correct panel: `php artisan make:filament-theme admin`.
 6. If the project uses a package manager other than NPM, use the matching `--pm` option, for example `php artisan make:filament-theme --pm=bun`.

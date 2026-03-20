@@ -30,11 +30,11 @@ Check the existing project before installing anything.
 
 ## Custom theme and hot reload
 
-Use a Filament custom theme when the panel expects assets to flow through the theme pipeline or when hot reload is unreliable without it.
+Use a Filament custom theme as the default requirement for React inside Filament. If it already exists, reuse it. If it does not exist, create it before finalizing the React setup.
 
 1. Check whether the panel provider already registers a custom theme.
 2. If a custom theme already exists, reuse it and add the React entrypoint there or import React from the existing theme entrypoint.
-3. If no custom theme exists, create and register one only when needed for reliable panel asset loading or hot reload.
+3. If no custom theme exists, create and register one before completing the React integration.
 4. For Filament v4 and v5, prefer the generator plus `->viteTheme(...)`.
 5. For Filament v3, inspect the Tailwind version before assuming the Vite theme path is identical to v4/v5.
 6. Prefer one theme entrypoint for panel styles and scripts instead of parallel asset pipelines.
@@ -48,7 +48,7 @@ Run this only when `react` or `react-dom` is not already installed:
 npm install react react-dom
 ```
 
-## If a custom theme is needed
+## Create or reuse the custom theme
 
 Choose the theme flow by Filament version, then fall back to manual configuration if the generator cannot patch the project files.
 
@@ -145,8 +145,9 @@ export default function ExampleCard({ title, value }) {
 1. Reuse the existing entrypoint if the project already mounts React elsewhere.
 2. Reuse the existing alias, import, and component folder conventions.
 3. Reuse the existing custom theme if the panel already uses one.
-4. Add only the missing Filament Blade root, props wiring, asset inclusion, and theme registration.
-5. Avoid duplicating bootstrap files unless the current structure makes separation necessary.
+4. If the panel does not use a custom theme yet, create it as part of the React setup.
+5. Add only the missing Filament Blade root, props wiring, asset inclusion, and theme registration.
+6. Avoid duplicating bootstrap files unless the current structure makes separation necessary.
 
 ## Diagnostic checklist
 
